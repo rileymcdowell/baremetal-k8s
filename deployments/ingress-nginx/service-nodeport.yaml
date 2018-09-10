@@ -40,6 +40,11 @@ spec:
     nodePort: 31443
     targetPort: 8443
     protocol: TCP
+  - name: port8080
+    port: 8080
+    nodePort: 31080
+    targetPort: 8080
+    protocol: TCP
   - name: port443
     port: 443
     nodePort: 30443

@@ -20,6 +20,7 @@ curl https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/pr
 sed -i '/^  ports:/,/^  selector:/{/^  ports:/!{/^  selector:/!d}}' service-nodeport.yaml # Remove the port specs.
 sed -i 's/ports:/ports:\n  - name: port80\n    port: 80\n    nodePort: 30080\n    targetPort: 80\n    protocol: TCP/' service-nodeport.yaml
 sed -i 's/ports:/ports:\n  - name: port443\n    port: 443\n    nodePort: 30443\n    targetPort: 443\n    protocol: TCP/' service-nodeport.yaml
+sed -i 's/ports:/ports:\n  - name: port8080\n    port: 8080\n    nodePort: 31080\n    targetPort: 8080\n    protocol: TCP/' service-nodeport.yaml
 sed -i 's/ports:/ports:\n  - name: port8443\n    port: 8443\n    nodePort: 31443\n    targetPort: 8443\n    protocol: TCP/' service-nodeport.yaml
 sed -i 's/ports:/ports:\n  - name: port8843\n    port: 8843\n    nodePort: 31843\n    targetPort: 8843\n    protocol: TCP/' service-nodeport.yaml
 sed -i 's/ports:/ports:\n  - name: port8880\n    port: 8880\n    nodePort: 31880\n    targetPort: 8880\n    protocol: TCP/' service-nodeport.yaml
@@ -37,6 +38,7 @@ metadata:
   name: tcp-services
   namespace: ingress-nginx
 data:
+  8080: "default/unifi:8080"
   8443: "default/unifi:8443"
   8843: "default/unifi:8843"
   8880: "default/unifi:8880"
