@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tcp-services
+  namespace: ingress-nginx
+data:
+  8443: "default/unifi:8443"
+  8843: "default/unifi:8843"
+  8880: "default/unifi:8880"
+  6789: "default/unifi:6789"
