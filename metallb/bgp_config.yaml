@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    peers:
+    - peer-address: 192.168.1.1
+      peer-asn: 64512 # Absolute lowest private ASN allowed
+      my-asn: 64512 # Absolute lowest private ASN allowed
+    address-pools:
+    - name: default
+      protocol: bgp
+      avoid-buggy-ips: true
+      addresses:
+      - 192.168.2.192/26 # Last 64 addresses

@@ -34,6 +34,7 @@ sudo swapoff -a
 # Disable swap permanently
 sudo sed -i 's/^\/swap.img/# No swap for k8s\n#\/swap.img/' /etc/fstab
 
+# https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
 # Set up the cluster
 sudo kubeadm init --kubernetes-version=$(kubeadm version --output short)
 
