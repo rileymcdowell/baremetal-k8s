@@ -3,7 +3,7 @@
 which docker &> /dev/null
 if [ ! "$?" == "0" ] ; then
     sudo apt-get update
-    sudo apt-get install \
+    sudo apt-get install -y \
 	apt-transport-https \
 	ca-certificates \
 	curl \
@@ -14,11 +14,11 @@ if [ ! "$?" == "0" ] ; then
         $(lsb_release -cs) \
         stable"
     sudo apt-get update
-    sudo apt-get install docker-ce
+    sudo apt-get install -y docker-ce
     sudo usermod -aG docker $USER
 fi
 
-which kubectl &> /dev/null
+which kubeadm &> /dev/null
 if [ ! "$?" == "0" ] ; then
     sudo apt-get update 
     sudo apt-get install -y apt-transport-https curl
