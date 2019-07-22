@@ -12,7 +12,8 @@ fi
 # It's slightly less efficient, but we don't care for a tiny baremetal cluster.
 
 pushd weavenet
-curl "https://cloud.weave.works/k8s/v1.10/net.yaml?env.NO_MASQ_LOCAL=1" -o weavenet.yaml
+curl "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+-o weavenet.yaml
 kubectl apply -f weavenet.yaml
 popd
 

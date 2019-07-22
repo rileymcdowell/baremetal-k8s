@@ -39,10 +39,16 @@ spec:
       labels:
         app: nfs-provisioner
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: master0
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: "Exists"
+        effect: "NoSchedule"
       serviceAccount: nfs-provisioner
       containers:
         - name: nfs-provisioner
-          image: quay.io/kubernetes_incubator/nfs-provisioner:v2.1.0-k8s1.11
+          image: quay.io/kubernetes_incubator/nfs-provisioner:v2.2.1-k8s1.12
           ports:
             - name: nfs
               containerPort: 2049
