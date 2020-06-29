@@ -1,0 +1,13 @@
+# Options: https://github.com/helm/charts/tree/master/stable/grafana
+service:
+  type: "LoadBalancer"
+  loadBalancerIP: 192.168.2.200
+
+grafana.ini:
+    auth.anonymous: 
+      enabled: true 
+      org_name: Main Org.
+      org_role: Admin
+
+sidecar.datasources.enabled: 1
+

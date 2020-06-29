@@ -1,0 +1,6 @@
+# Options: https://github.com/helm/charts/tree/master/stable/prometheus
+
+nodeExporter:
+  tolerations:
+    - effect: "NoSchedule"
+      operator: "Exists"
