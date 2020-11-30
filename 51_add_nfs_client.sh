@@ -11,13 +11,13 @@ fi
 
 
 # Maybe clean up nfs
-helm --tiller-namespace=helm list | grep "${NAME}" &> /dev/null
+helm --namespace=${NAMESPACE} list | grep "${NAME}" &> /dev/null
 if [ "$?" -eq "0" ] ; then
-    helm --tiller-namespace=helm delete ${NAME} --purge
+    helm delete ${NAME} --purge
 fi
 
 
-# Install prometheus with custom values
+# Install nfs-client-provisioner with custom values
 helm install stable/${HELM_CHART} \
 	--tiller-namespace helm \
 	--namespace ${NAMESPACE} \

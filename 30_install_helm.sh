@@ -9,18 +9,13 @@ fi
 
 # Obtain tiller and helm
 pushd ${HELM_DIR}
-curl https://get.helm.sh/helm-v2.14.2-linux-amd64.tar.gz -o helm.tar.gz
+curl https://get.helm.sh/helm-v3.4.1-linux-amd64.tar.gz -o helm.tar.gz
 tar xvzf helm.tar.gz
 cp ./linux-amd64/helm ~/bin
-cp ./linux-amd64/tiller ~/bin/
 popd # ${HELM_DIR}
 
-kubectl create namespace ${NAMESPACE} 
-kubectl --namespace=${NAMESPACE} apply -f ${HELM_DIR}/helm-service-account.yaml
-kubectl --namespace=${NAMESPACE} apply -f ${HELM_DIR}/helm-role-binding.yaml
-
-# Initialize helm
-helm init --tiller-namespace=${NAMESPACE} --service-account tiller --history-max 200 --wait
+# Add a helm repo
+helm repo add "stable" "https://charts.helm.sh/stable" --force-update
 
 # Get helm up to date
 helm repo update
