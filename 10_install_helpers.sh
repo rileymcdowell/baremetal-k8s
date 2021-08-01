@@ -6,7 +6,7 @@ fi
 
 pushd ${HOME}/bin
     if [ ! -f ./kompose ] ; then
-        curl -L https://github.com/kubernetes/kompose/releases/download/v1.16.0/kompose-linux-amd64 -o kompose
+        curl -L https://github.com/kubernetes/kompose/releases/download/v1.22.0/kompose-linux-amd64 -o kompose
         chmod 700 ./kompose
     fi
 popd

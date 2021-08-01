@@ -3,7 +3,7 @@
 which docker &> /dev/null
 if [ ! "$?" == "0" ] ; then
     sudo apt-get update
-    sudo apt-get install \
+    sudo apt-get install --yes \
 	apt-transport-https \
 	ca-certificates \
 	curl \
@@ -14,18 +14,19 @@ if [ ! "$?" == "0" ] ; then
         $(lsb_release -cs) \
         stable"
     sudo apt-get update
-    sudo apt-get install docker-ce
+    sudo apt-get install docker-ce --yes
     sudo usermod -aG docker $USER
+    echo '{ "exec-opts": ["native.cgroupdriver=systemd"] }' | sudo tee /etc/docker/daemon.json
 fi
 
 which kubectl &> /dev/null
 if [ ! "$?" == "0" ] ; then
     sudo apt-get update 
     sudo apt-get install -y apt-transport-https curl
-    sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-    echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
     sudo apt-get update
-    sudo apt-get install -y kubelet=1.13.8-00 kubeadm=1.13.8-00 kubectl=1.13.8-00
+    sudo apt-get install -y kubelet=1.21.3-00 kubeadm=1.21.3-00 kubectl=1.21.3-00
     sudo apt-mark hold kubelet kubeadm kubectl
 fi
 
